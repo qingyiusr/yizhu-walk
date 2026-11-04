@@ -18,7 +18,7 @@ window.SITE = {
   /* ---------- 照片上傳設定 ----------
      uploadUrl：Google Apps Script 部署後的網址（設定方法見 README.md）。留空時照片只存在學生自己的手機。
      uploadKey：和 Apps Script 裡的 KEY 填一樣的文字，避免陌生人亂傳檔案。 */
-  uploadUrl: "",
+  uploadUrl: "https://script.google.com/macros/s/AKfycbyebpN7ixvq3jj8jFsfHDrEv--YHmaKvNIhHGysf3Mb7n0LlyNGTEmPeGlQvoH0Q5s4jw/exec",
   uploadKey: "yizhu2026",
   maxPhotos: 5,
   /* ---------- 定位集章 ----------
