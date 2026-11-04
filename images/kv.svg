@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1414 2000" width="1414" height="2000">
+  <!-- 義起走讀！ 主視覺（A 系列直式）
+       活動日期：2026/11/14（六）13:10–15:45 -->
+  <defs>
+    <style>
+      .h{font-family:"Noto Sans TC","Noto Sans CJK TC","PingFang TC","Microsoft JhengHei",sans-serif;font-weight:900}
+      .m{font-family:"Noto Sans TC","Noto Sans CJK TC","PingFang TC","Microsoft JhengHei",sans-serif;font-weight:700}
+      .r{font-family:"Noto Sans TC","Noto Sans CJK TC","PingFang TC","Microsoft JhengHei",sans-serif;font-weight:500}
+      .ln{fill:none;stroke-width:40;stroke-linecap:round;stroke-linejoin:round}
+      .stn{fill:#F2EEE6;stroke-width:12}
+    </style>
+  </defs>
+  <rect width="1414" height="2000" fill="#F2EEE6"/>
+
+  <!-- 角落小怪獸（不規則形） -->
+  <g id="corner-monster">
+    <path fill="#F5D875" d="M1414 0V335C1350 372 1268 338 1236 272C1176 262 1118 210 1140 146C1098 96 1126 24 1170 0Z"/>
+    <circle cx="1262" cy="176" r="26" fill="#FFFFFF"/><circle cx="1255" cy="182" r="13" fill="#2A2B3D"/>
+    <circle cx="1336" cy="158" r="30" fill="#FFFFFF"/><circle cx="1328" cy="165" r="15" fill="#2A2B3D"/>
+    <path d="M1282 236Q1300 254 1320 236" fill="none" stroke="#2A2B3D" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <!-- 幾何點綴 -->
+  <g transform="translate(1180 470)" stroke="#F2A146" stroke-width="14" stroke-linecap="round">
+    <line x1="0" y1="-52" x2="0" y2="52"/><line x1="-45" y1="-26" x2="45" y2="26"/><line x1="-45" y1="26" x2="45" y2="-26"/>
+  </g>
+  <circle cx="1100" cy="560" r="26" fill="#F3AFB0"/><circle cx="1255" cy="600" r="14" fill="#F3AFB0"/>
+  <circle cx="1160" cy="900" r="12" fill="#8FCDEB"/><circle cx="1240" cy="1060" r="20" fill="#8FCDEB"/><circle cx="96" cy="1080" r="10" fill="#8FCDEB"/>
+  <path d="M900 790c40-60 90-60 110 0s70 60 110 0" fill="none" stroke="#F3AFB0" stroke-width="12" stroke-linecap="round"/>
+  <text class="m" font-size="26" fill="#6E7DBB" letter-spacing="14" transform="translate(1318 640) rotate(90)">WALKING MAP</text>
+
+  <!-- 標籤 -->
+  <rect x="120" y="150" width="560" height="64" rx="32" fill="#EE7E7B"/>
+  <text class="m" x="400" y="193" font-size="30" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">2026・義竹國中 × 青銀搖滾力</text>
+
+  <!-- 主標 -->
+  <text class="h" x="104" y="560" font-size="320" fill="#EE7E7B" letter-spacing="-6">義起</text>
+  <text class="h" x="104" y="880" font-size="320" fill="#2A2B3D" letter-spacing="-6">走讀<tspan fill="#F2A146">!</tspan></text>
+
+  <!-- 副標與資訊 -->
+  <text class="h" x="120" y="1000" font-size="66" fill="#2A2B3D" letter-spacing="8">插畫地圖走讀<tspan fill="#F2A146" dx="12">／</tspan><tspan font-size="50" fill="#6E7DBB" dx="6">三條路線・十個地點</tspan></text>
+  <text class="h" x="120" y="1110" font-size="76" fill="#F2A146">11/14<tspan font-size="44" dx="18">週六</tspan><tspan class="m" font-size="44" fill="#2A2B3D" dx="40">13:10 – 15:45</tspan></text>
+  <rect x="120" y="1150" width="760" height="58" fill="#6E7DBB"/>
+  <text class="m" x="146" y="1190" font-size="28" fill="#FFFFFF" letter-spacing="3">集合｜岸腳村社區活動中心暨村辦公處</text>
+  <text class="r" x="120" y="1262" font-size="28" fill="#5A5C70">走訪古厝、教堂、八掌溪和市場，把義竹的人事物畫成自己的角色。</text>
+
+  <!-- 下半部：路線圖＋拼圖怪獸（網頁也使用這一段，viewBox 0 1280 1414 630） -->
+  <g id="bottom-art">
+    <!-- 拼圖怪獸 -->
+    <g id="puzzle-monster" transform="translate(1414 1910) scale(.78) translate(-1414 -1910)">
+      <path fill="#5DB6DE" d="M1030 1450H1100C1122 1450 1128 1440 1122 1424C1110 1392 1140 1366 1182 1366C1224 1366 1254 1392 1242 1424C1236 1440 1242 1450 1264 1450H1414V1910H970V1758C970 1736 980 1730 996 1738C1028 1752 1054 1722 1054 1680C1054 1638 1028 1608 996 1622C980 1630 970 1624 970 1602V1510A60 60 0 0 1 1030 1450Z"/>
+      <!-- 五官集中在凹口右側，四周至少留 50px 不碰外框 -->
+      <ellipse cx="1150" cy="1600" rx="40" ry="43" fill="#FFFFFF"/><circle cx="1142" cy="1590" r="19" fill="#2A2B3D"/><circle cx="1135" cy="1582" r="6" fill="#FFFFFF"/>
+      <ellipse cx="1300" cy="1596" rx="44" ry="47" fill="#FFFFFF"/><circle cx="1291" cy="1585" r="21" fill="#2A2B3D"/><circle cx="1284" cy="1577" r="6.5" fill="#FFFFFF"/>
+      <ellipse cx="1118" cy="1676" rx="24" ry="13" fill="#F3AFB0"/><ellipse cx="1334" cy="1672" rx="26" ry="14" fill="#F3AFB0"/>
+      <path fill="#2A2B3D" d="M1150 1696Q1225 1680 1300 1694Q1306 1790 1226 1800Q1150 1800 1150 1696Z"/>
+      <path fill="#FFFFFF" d="M1172 1692L1180 1722L1190 1690Z"/><path fill="#FFFFFF" d="M1262 1689L1271 1719L1280 1690Z"/>
+      <path fill="#EE7E7B" d="M1186 1786Q1226 1754 1268 1784Q1248 1800 1226 1800Q1202 1800 1186 1786Z"/>
+    </g>
+    <!-- 三條路線 -->
+    <path class="ln" stroke="#EE7E7B" d="M-40 1400H220L340 1520H660"/>
+    <path class="ln" stroke="#6E7DBB" d="M420 1960V1780L540 1660H600L660 1560"/>
+    <path class="ln" stroke="#F2A146" d="M1460 1340H900L780 1460V1500H660"/>
+    <g class="stn">
+      <circle cx="220" cy="1400" r="26" stroke="#EE7E7B"/><circle cx="420" cy="1520" r="26" stroke="#EE7E7B"/><circle cx="550" cy="1520" r="26" stroke="#EE7E7B"/>
+      <circle cx="420" cy="1810" r="26" stroke="#6E7DBB"/><circle cx="540" cy="1660" r="26" stroke="#6E7DBB"/><circle cx="630" cy="1610" r="24" stroke="#6E7DBB"/>
+      <circle cx="1090" cy="1340" r="26" stroke="#F2A146"/><circle cx="840" cy="1400" r="26" stroke="#F2A146"/><circle cx="780" cy="1480" r="22" stroke="#F2A146"/>
+    </g>
+    <circle cx="660" cy="1500" r="74" fill="#F5D875"/>
+    <text class="h" x="660" y="1522" font-size="62" fill="#2A2B3D" text-anchor="middle">集</text>
+    <g class="m" font-size="28">
+      <text x="220" y="1356" fill="#EE7E7B" text-anchor="middle">路線一 古厝與信仰</text>
+      <text x="460" y="1880" fill="#6E7DBB">路線二 翁家與八掌溪</text>
+      <text x="1250" y="1310" fill="#F2A146" text-anchor="middle">路線三 學校與市場</text>
+    </g>
+  </g>
+
+  <!-- 底部單位 -->
+  <rect x="0" y="1910" width="1414" height="90" fill="#2A2B3D"/>
+  <text class="r" x="707" y="1966" font-size="26" fill="#F2EEE6" text-anchor="middle">主辦單位：國立臺南大學 青銀搖滾力-嘉南城鄉文化轉譯與創生計畫　｜　合辦單位：義竹國中</text>
+</svg>
