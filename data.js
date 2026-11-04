@@ -3,7 +3,8 @@
    ------------------------------------------------------------
    之後要新增、修改內容，只要改這個檔案，不用動 index.html。
    ・文字用 "雙引號" 包起來，每一項後面記得加逗號。
-   ・圖片放進 images 資料夾，檔名填在 image 欄位，例如 "wengqingjiang.jpg"。
+   ・地點照片：放進 images 資料夾，檔名用地點代號，例如 images/wengqingjiang.jpg，就會自動顯示，image 欄位可以留空。
+     檔名不一樣（例如 .png）才需要填 image。imageCredit 填照片來源或拍攝者，例如「攝影：王小明」。
      還沒有圖片時留空 ""，網站會自動顯示預留框。
    ・status: "draft" 代表內容還沒查證，網頁上會顯示「待查證」標籤；
      查證完成後改成 "ok"。
@@ -48,23 +49,23 @@ window.SITE = {
 window.ROUTES = [
   {
     id: "route-1",
-    name: "路線一　古厝與信仰",
+    name: "路線一　新舊風格拼貼",
     color: "#FF48B0",
-    summary: "從義竹最有名的洋樓古厝出發，經過天主堂，最後在便利商店補給。看看百年前的大戶人家和今天的小鎮日常。",
+    summary: "1911 年的洋樓把閩南、日式、西洋三種風格拼在一起；以廟宇為主的小鎮裡也有天主堂；最現代的超商招牌，還藏著義竹的舊地名「二竹」。一路觀察新的和舊的，怎麼拼貼成今天的義竹。",
     stops: ["wengqingjiang", "st-joseph", "seven-erzhu"]
   },
   {
     id: "route-2",
-    name: "路線二　翁家與八掌溪",
+    name: "路線二　翁家記憶拼圖",
     color: "#0078BF",
-    summary: "走訪前司法院長翁岳生的祖居，再到八掌溪畔看看當年翁家祖先登陸的河流，最後認識「六桂」這個村名的由來。",
+    summary: "翁岳生的老家、祖先上岸的八掌溪、來自家族典故的六桂村，三站各是翁家故事的一塊。把三塊拼起來，看看一個家族怎麼在義竹落地生根。",
     stops: ["cunde-hall", "bazhang-river", "liugui-center"]
   },
   {
     id: "route-3",
-    name: "路線三　學校與市場",
+    name: "路線三　文武食光調色盤",
     color: "#FF6C2F",
-    summary: "從百年小學出發，經過武秀才的老宅，最後走進市場，認識義竹人每天吃的味道。",
+    summary: "百年小學的「文」、清代武秀才古宅的「武」、市場小吃的「食光」。一路收集義竹日常的顏色，調出屬於你的義竹色盤。",
     stops: ["yizhu-elementary", "wengqingchun", "market-1"]
   }
 ];
@@ -76,6 +77,7 @@ window.SPOTS = {
     lat: 23.3338307, lng: 120.2436577, label: "right", icon: "house",
     type: "guard",
     image: "",
+    imageCredit: "",
     card: "",   /* 角色卡圖片檔名，放在 images 資料夾；留空會先顯示拼圖怪獸 */
     status: "draft",
     intro:
@@ -98,6 +100,7 @@ window.SPOTS = {
     lat: 23.3371475, lng: 120.2424863, label: "right", icon: "church",
     type: "guard",
     image: "",
+    imageCredit: "",
     card: "",   /* 角色卡圖片檔名，放在 images 資料夾；留空會先顯示拼圖怪獸 */
     status: "draft",
     intro:
@@ -119,6 +122,7 @@ window.SPOTS = {
     lat: 23.3364845, lng: 120.2424541, label: "right", icon: "shop",
     type: "food",
     image: "",
+    imageCredit: "",
     card: "",   /* 角色卡圖片檔名，放在 images 資料夾；留空會先顯示拼圖怪獸 */
     status: "draft",
     intro:
@@ -139,6 +143,7 @@ window.SPOTS = {
     lat: 23.3321661, lng: 120.2417078, label: "right", icon: "house2",
     type: "story",
     image: "",
+    imageCredit: "",
     card: "",   /* 角色卡圖片檔名，放在 images 資料夾；留空會先顯示拼圖怪獸 */
     status: "draft",
     intro:
@@ -160,6 +165,7 @@ window.SPOTS = {
     lat: 23.3330635, lng: 120.2443163, label: "right", icon: "wave",
     type: "wind",
     image: "",
+    imageCredit: "",
     card: "",   /* 角色卡圖片檔名，放在 images 資料夾；留空會先顯示拼圖怪獸 */
     status: "draft",
     intro:
@@ -180,6 +186,7 @@ window.SPOTS = {
     lat: 23.3344394, lng: 120.2420277, label: "right", icon: "people",
     type: "story",
     image: "",
+    imageCredit: "",
     card: "",   /* 角色卡圖片檔名，放在 images 資料夾；留空會先顯示拼圖怪獸 */
     status: "draft",
     intro:
@@ -201,6 +208,7 @@ window.SPOTS = {
     lat: 23.3360369, lng: 120.2455638, label: "right", icon: "flag",
     type: "story",
     image: "",
+    imageCredit: "",
     card: "",   /* 角色卡圖片檔名，放在 images 資料夾；留空會先顯示拼圖怪獸 */
     status: "draft",
     intro:
@@ -222,6 +230,7 @@ window.SPOTS = {
     lat: 23.334563, lng: 120.244994, label: "below", icon: "gate",
     type: "guard",
     image: "",
+    imageCredit: "",
     card: "",   /* 角色卡圖片檔名，放在 images 資料夾；留空會先顯示拼圖怪獸 */
     status: "draft",
     intro:
@@ -242,6 +251,7 @@ window.SPOTS = {
     lat: 23.3351166, lng: 120.2439238, label: "left", icon: "awning",
     type: "food",
     image: "",
+    imageCredit: "",
     card: "",   /* 角色卡圖片檔名，放在 images 資料夾；留空會先顯示拼圖怪獸 */
     status: "draft",
     intro:

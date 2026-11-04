@@ -219,7 +219,10 @@ section.first{margin-top:16px}
 .type::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--tc)}
 .draft{border:2px dashed #C9C4BD;background:transparent;color:var(--muted)}
 .photo{aspect-ratio:4/3;width:100%;max-height:360px;border-radius:20px;overflow:hidden;background:radial-gradient(circle,#E8E1D2 3px,transparent 3.5px) 0 0/22px 22px,var(--white);display:grid;place-items:center;color:var(--muted);font-weight:700}
-.photo img{width:100%;height:100%;object-fit:cover}
+.photo{margin:0;position:relative}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .ph0{display:none}.photo.none .ph0{display:block}
+.photo figcaption{position:absolute;right:0;bottom:0;font-size:11px;background:rgba(247,245,240,.88);color:var(--ink);padding:2px 8px;border-radius:3px 0 0 0}
 .block{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
 .block ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
 .mission{border:2px solid var(--rc)}
@@ -245,6 +248,11 @@ section.first{margin-top:16px}
 .th{position:relative;aspect-ratio:1;max-width:100%;border-radius:12px;overflow:hidden;background:#EEE}
 .th img{width:100%;height:100%;object-fit:cover;display:block}
 .th .st{position:absolute;left:4px;bottom:4px;font-size:11px;font-weight:900;padding:1px 7px;border-radius:999px;background:var(--white)}
+.th .del{position:absolute;right:4px;top:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(247,245,240,.92);color:var(--ink);font-size:18px;font-weight:900;line-height:1;display:grid;place-items:center;padding:0;box-shadow:1px 1px 0 var(--pinkI,#FF48B0)}
+.th .ask{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:rgba(0,72,128,.88);color:#fff;font-size:12px;padding:4px}
+.th.asking .ask{display:flex}.th.asking .del{display:none}
+.th .ask button{border:0;border-radius:4px;font-size:12px;font-weight:900;padding:3px 12px;min-width:64px}
+.th .ask .yes{background:var(--pinkI,#FF48B0);color:#fff}.th .ask .no{background:#fff;color:var(--ink)}
 .th .st.ok{background:var(--ok);color:#fff} .th .st.wait{background:var(--orange);color:#fff} .th .st.local{background:var(--yellow)}
 
 /* ---------- 集章圖卡 ---------- */
@@ -423,6 +431,47 @@ h2::before{border-radius:0;background:var(--pinkI);box-shadow:18px 0 0 var(--yel
 .ld .title span{color:var(--pinkI);text-shadow:3px 2px 0 rgba(0,120,191,.5)}
 .ld .bars i{background:#DAD8D2;border-radius:0}
 .ld .msg{color:var(--blue)}
+/* ---------- 選好路線後的填名字視窗 ---------- */
+.nsback{position:fixed;inset:0;z-index:60;background:rgba(0,72,128,.55);opacity:0;transition:opacity .25s}
+.nsback.in{opacity:1}
+.namesheet{position:fixed;left:0;right:0;bottom:0;z-index:61;max-height:92dvh;overflow-y:auto;background:var(--white);border-top:8px solid var(--rc);
+  box-shadow:0 -10px 30px rgba(0,40,80,.25);padding-block:16px calc(18px + env(safe-area-inset-bottom,0px));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:12px;transform:translateY(105%);transition:transform .3s cubic-bezier(.2,.8,.25,1)}
+.namesheet.in{transform:none}
+@media (min-width:640px){.namesheet{left:50%;right:auto;width:560px;margin-left:-280px;bottom:24px;border-radius:4px;max-height:86dvh}}
+.nshead{display:flex;align-items:center;gap:12px}
+.nshead>div{flex:1;min-width:0}
+.nshead h2{font-size:24px}
+.nshead h2::before{display:none}
+.nsno{flex:none;width:52px;height:52px;background:var(--rc);color:#fff;font-weight:900;font-size:26px;display:grid;place-items:center;border-radius:3px;box-shadow:3px 3px 0 var(--pinkI,#FF48B0)}
+.nsx{flex:none;border:2px solid var(--blue);background:transparent;color:var(--blue);font-weight:900;font-size:13px;padding:6px 10px;border-radius:4px}
+.namesheet .btn{width:100%}
+body.ns-open{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.namesheet,.nsback{transition:none}}
+/* ---------- 角色圖鑑：一條路線一個主題 ---------- */
+.dex{display:flex;flex-direction:column;gap:30px}
+.dexr{display:flex;flex-direction:column;gap:8px}
+.dexh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:3px solid var(--rc);padding-bottom:6px}
+.dexh .no{background:var(--rc);color:#fff;font-weight:900;font-size:14px;padding:3px 10px;border-radius:3px;letter-spacing:.08em}
+.dexh h3{font-size:22px;color:var(--blue);text-shadow:2px 1.5px 0 rgba(255,72,176,.55)}
+.dexh .mine{font-size:12px;font-weight:900;background:var(--yel,#FFE800);color:var(--blue);padding:2px 8px;border-radius:3px}
+.dexh .cnt{margin-left:auto;font-weight:900;font-size:15px;color:var(--rc);font-variant-numeric:tabular-nums}
+.dexrow{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;position:relative}
+.dexrow::before{content:"";position:absolute;left:16%;right:16%;top:34%;height:6px;background:var(--rc);border-radius:3px;box-shadow:3px 2px 0 rgba(0,120,191,.45)}
+.dexrow li{min-width:0;position:relative}
+.dexc{position:relative;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);background:var(--white);border:2px dashed var(--tc);border-radius:4px;padding:8px}
+.dexc.on{border-style:solid;box-shadow:3px 3px 0 var(--tc)}
+.dexc .dn{position:absolute;left:-6px;top:-8px;z-index:1;width:24px;height:24px;border-radius:50%;background:var(--rc);color:#fff;font-weight:900;font-size:13px;display:grid;place-items:center;border:2px solid var(--paper)}
+.dexc .da{aspect-ratio:1;max-width:100%;border-radius:3px;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(circle,var(--tc) 1.3px,transparent 1.5px) 0 0/6px 6px,var(--paper)}
+.dexc.on .da{background:var(--paper)}
+.dexc .da b{font-size:34px;font-weight:900;color:var(--tc);background:var(--white);width:46px;height:46px;border-radius:50%;display:grid;place-items:center}
+.dexc .da img{width:100%;height:100%;object-fit:cover}
+.dexc .da svg{width:76%;height:auto}
+.dexc .dt{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.dexc .dname{font-size:14px;line-height:1.3;word-break:break-all}
+.dexc small{font-size:11px;color:var(--muted)}
 footer{background:var(--blue)!important;color:#fff!important}
 footer{margin-top:48px;color:var(--paper);background:var(--ink)}
 footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 26px;text-align:center;font-size:13px;line-height:1.9}
@@ -487,7 +536,7 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
   function fmt(ts){var d=new Date(ts);return (d.getMonth()+1)+'/'+d.getDate()+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
   function mapUrl(p){return 'https://www.google.com/maps/search/?api=1&query='+p.lat+','+p.lng}
 
-  var METRO="<svg class=\"metro\" viewBox=\"0 1290 1414 620\" aria-hidden=\"true\"><style>.h{font-family:\"Noto Sans TC\",\"Noto Sans CJK TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif;font-weight:900}.m{font-family:\"Noto Sans TC\",\"Noto Sans CJK TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif;font-weight:700}.r{font-family:\"Noto Sans TC\",\"Noto Sans CJK TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif;font-weight:500}.ln{fill:none;stroke-width:40;stroke-linecap:round;stroke-linejoin:round}.stn{fill:#F2EEE6;stroke-width:12}</style><g id=\"bottom-art\"><g id=\"puzzle-monster\" transform=\"translate(1414 1910) scale(.78) translate(-1414 -1910)\"><path fill=\"#0078BF\" d=\"M1030 1450H1100C1122 1450 1128 1440 1122 1424C1110 1392 1140 1366 1182 1366C1224 1366 1254 1392 1242 1424C1236 1440 1242 1450 1264 1450H1414V1910H970V1758C970 1736 980 1730 996 1738C1028 1752 1054 1722 1054 1680C1054 1638 1028 1608 996 1622C980 1630 970 1624 970 1602V1510A60 60 0 0 1 1030 1450Z\"/><ellipse cx=\"1150\" cy=\"1600\" rx=\"40\" ry=\"43\" fill=\"#FFFFFF\"/><circle cx=\"1142\" cy=\"1590\" r=\"19\" fill=\"#22386B\"/><circle cx=\"1135\" cy=\"1582\" r=\"6\" fill=\"#FFFFFF\"/><ellipse cx=\"1300\" cy=\"1596\" rx=\"44\" ry=\"47\" fill=\"#FFFFFF\"/><circle cx=\"1291\" cy=\"1585\" r=\"21\" fill=\"#22386B\"/><circle cx=\"1284\" cy=\"1577\" r=\"6.5\" fill=\"#FFFFFF\"/><ellipse cx=\"1118\" cy=\"1676\" rx=\"24\" ry=\"13\" fill=\"#F3AFB0\"/><ellipse cx=\"1334\" cy=\"1672\" rx=\"26\" ry=\"14\" fill=\"#F3AFB0\"/><path fill=\"#22386B\" d=\"M1150 1696Q1225 1680 1300 1694Q1306 1790 1226 1800Q1150 1800 1150 1696Z\"/><path fill=\"#FFFFFF\" d=\"M1172 1692L1180 1722L1190 1690Z\"/><path fill=\"#FFFFFF\" d=\"M1262 1689L1271 1719L1280 1690Z\"/><path fill=\"#EE7E7B\" d=\"M1186 1786Q1226 1754 1268 1784Q1248 1800 1226 1800Q1202 1800 1186 1786Z\"/></g><path class=\"ln\" stroke=\"#EE7E7B\" d=\"M-40 1400H220L340 1520H660\"/><path class=\"ln\" stroke=\"#6E7DBB\" d=\"M420 1960V1780L540 1660H600L660 1560\"/><path class=\"ln\" stroke=\"#F2A146\" d=\"M1460 1340H900L780 1460V1500H660\"/><g class=\"stn\"><circle cx=\"220\" cy=\"1400\" r=\"26\" stroke=\"#EE7E7B\"/><circle cx=\"420\" cy=\"1520\" r=\"26\" stroke=\"#EE7E7B\"/><circle cx=\"550\" cy=\"1520\" r=\"26\" stroke=\"#EE7E7B\"/><circle cx=\"420\" cy=\"1810\" r=\"26\" stroke=\"#6E7DBB\"/><circle cx=\"540\" cy=\"1660\" r=\"26\" stroke=\"#6E7DBB\"/><circle cx=\"630\" cy=\"1610\" r=\"24\" stroke=\"#6E7DBB\"/><circle cx=\"1090\" cy=\"1340\" r=\"26\" stroke=\"#F2A146\"/><circle cx=\"840\" cy=\"1400\" r=\"26\" stroke=\"#F2A146\"/><circle cx=\"780\" cy=\"1480\" r=\"22\" stroke=\"#F2A146\"/></g><circle cx=\"660\" cy=\"1500\" r=\"74\" fill=\"#FFE800\"/><text class=\"h\" x=\"660\" y=\"1522\" font-size=\"62\" fill=\"#22386B\" text-anchor=\"middle\">集</text><g class=\"m\" font-size=\"28\"><text x=\"220\" y=\"1356\" fill=\"#EE7E7B\" text-anchor=\"middle\">路線一 古厝與信仰</text><text x=\"460\" y=\"1880\" fill=\"#6E7DBB\">路線二 翁家與八掌溪</text><text x=\"1250\" y=\"1310\" fill=\"#F2A146\" text-anchor=\"middle\">路線三 學校與市場</text></g></g></svg>";
+  var METRO="<svg class=\"metro\" viewBox=\"0 1290 1414 620\" aria-hidden=\"true\"><style>.h{font-family:\"Noto Sans TC\",\"Noto Sans CJK TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif;font-weight:900}.m{font-family:\"Noto Sans TC\",\"Noto Sans CJK TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif;font-weight:700}.r{font-family:\"Noto Sans TC\",\"Noto Sans CJK TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif;font-weight:500}.ln{fill:none;stroke-width:40;stroke-linecap:round;stroke-linejoin:round}.stn{fill:#F2EEE6;stroke-width:12}</style><g id=\"bottom-art\"><g id=\"puzzle-monster\" transform=\"translate(1414 1910) scale(.78) translate(-1414 -1910)\"><path fill=\"#0078BF\" d=\"M1030 1450H1100C1122 1450 1128 1440 1122 1424C1110 1392 1140 1366 1182 1366C1224 1366 1254 1392 1242 1424C1236 1440 1242 1450 1264 1450H1414V1910H970V1758C970 1736 980 1730 996 1738C1028 1752 1054 1722 1054 1680C1054 1638 1028 1608 996 1622C980 1630 970 1624 970 1602V1510A60 60 0 0 1 1030 1450Z\"/><ellipse cx=\"1150\" cy=\"1600\" rx=\"40\" ry=\"43\" fill=\"#FFFFFF\"/><circle cx=\"1142\" cy=\"1590\" r=\"19\" fill=\"#22386B\"/><circle cx=\"1135\" cy=\"1582\" r=\"6\" fill=\"#FFFFFF\"/><ellipse cx=\"1300\" cy=\"1596\" rx=\"44\" ry=\"47\" fill=\"#FFFFFF\"/><circle cx=\"1291\" cy=\"1585\" r=\"21\" fill=\"#22386B\"/><circle cx=\"1284\" cy=\"1577\" r=\"6.5\" fill=\"#FFFFFF\"/><ellipse cx=\"1118\" cy=\"1676\" rx=\"24\" ry=\"13\" fill=\"#F3AFB0\"/><ellipse cx=\"1334\" cy=\"1672\" rx=\"26\" ry=\"14\" fill=\"#F3AFB0\"/><path fill=\"#22386B\" d=\"M1150 1696Q1225 1680 1300 1694Q1306 1790 1226 1800Q1150 1800 1150 1696Z\"/><path fill=\"#FFFFFF\" d=\"M1172 1692L1180 1722L1190 1690Z\"/><path fill=\"#FFFFFF\" d=\"M1262 1689L1271 1719L1280 1690Z\"/><path fill=\"#EE7E7B\" d=\"M1186 1786Q1226 1754 1268 1784Q1248 1800 1226 1800Q1202 1800 1186 1786Z\"/></g><path class=\"ln\" stroke=\"#EE7E7B\" d=\"M-40 1400H220L340 1520H660\"/><path class=\"ln\" stroke=\"#6E7DBB\" d=\"M420 1960V1780L540 1660H600L660 1560\"/><path class=\"ln\" stroke=\"#F2A146\" d=\"M1460 1340H900L780 1460V1500H660\"/><g class=\"stn\"><circle cx=\"220\" cy=\"1400\" r=\"26\" stroke=\"#EE7E7B\"/><circle cx=\"420\" cy=\"1520\" r=\"26\" stroke=\"#EE7E7B\"/><circle cx=\"550\" cy=\"1520\" r=\"26\" stroke=\"#EE7E7B\"/><circle cx=\"420\" cy=\"1810\" r=\"26\" stroke=\"#6E7DBB\"/><circle cx=\"540\" cy=\"1660\" r=\"26\" stroke=\"#6E7DBB\"/><circle cx=\"630\" cy=\"1610\" r=\"24\" stroke=\"#6E7DBB\"/><circle cx=\"1090\" cy=\"1340\" r=\"26\" stroke=\"#F2A146\"/><circle cx=\"840\" cy=\"1400\" r=\"26\" stroke=\"#F2A146\"/><circle cx=\"780\" cy=\"1480\" r=\"22\" stroke=\"#F2A146\"/></g><circle cx=\"660\" cy=\"1500\" r=\"74\" fill=\"#FFE800\"/><text class=\"h\" x=\"660\" y=\"1522\" font-size=\"62\" fill=\"#22386B\" text-anchor=\"middle\">集</text><g class=\"m\" font-size=\"28\"><text x=\"220\" y=\"1356\" fill=\"#EE7E7B\" text-anchor=\"middle\">路線一 新舊風格拼貼</text><text x=\"460\" y=\"1880\" fill=\"#6E7DBB\">路線二 翁家記憶拼圖</text><text x=\"1250\" y=\"1310\" fill=\"#F2A146\" text-anchor=\"middle\">路線三 文武食光調色盤</text></g></g></svg>";
   var CMON="<svg class=\"cmon\" viewBox=\"1110 0 304 380\" aria-hidden=\"true\"><g id=\"corner-monster\"><path fill=\"#FFE800\" d=\"M1414 0V335C1350 372 1268 338 1236 272C1176 262 1118 210 1140 146C1098 96 1126 24 1170 0Z\"/><circle cx=\"1262\" cy=\"176\" r=\"26\" fill=\"#FFFFFF\"/><circle cx=\"1255\" cy=\"182\" r=\"13\" fill=\"#22386B\"/><circle cx=\"1336\" cy=\"158\" r=\"30\" fill=\"#FFFFFF\"/><circle cx=\"1328\" cy=\"165\" r=\"15\" fill=\"#22386B\"/><path d=\"M1282 236Q1300 254 1320 236\" fill=\"none\" stroke=\"#22386B\" stroke-width=\"8\" stroke-linecap=\"round\"/></g></svg>";
   var MINI='<g class="mon-bob"><path fill="#FF48B0" opacity=".8" transform="translate(2.6 2)" d="M-18 -40H-7C-4 -40 -4 -42 -5 -44C-6 -48 -3 -51 0 -51C3 -51 6 -48 5 -44C4 -42 4 -40 7 -40H18A6 6 0 0 1 24 -34V-6A6 6 0 0 1 18 0H-18A6 6 0 0 1 -24 -6V-14C-24 -17 -22 -18 -20 -17.5C-18 -17 -16 -19 -16 -22C-16 -25 -18 -27 -20 -26.5C-22 -26 -24 -27 -24 -30V-34A6 6 0 0 1 -18 -40Z"/><path fill="#0078BF" d="M-18 -40H-7C-4 -40 -4 -42 -5 -44C-6 -48 -3 -51 0 -51C3 -51 6 -48 5 -44C4 -42 4 -40 7 -40H18A6 6 0 0 1 24 -34V-6A6 6 0 0 1 18 0H-18A6 6 0 0 1 -24 -6V-14C-24 -17 -22 -18 -20 -17.5C-18 -17 -16 -19 -16 -22C-16 -25 -18 -27 -20 -26.5C-22 -26 -24 -27 -24 -30V-34A6 6 0 0 1 -18 -40Z"/><circle cx="-6" cy="-25" r="4.4" fill="#fff"/><circle cx="-7" cy="-26" r="2.2" fill="#22386B"/><circle cx="10" cy="-25.5" r="5" fill="#fff"/><circle cx="9" cy="-26.5" r="2.5" fill="#22386B"/><path fill="#22386B" d="M-5 -14Q3 -16 12 -14Q12 -6 3.5 -5Q-5 -5 -5 -14Z"/></g>';
 
@@ -546,12 +595,16 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
         '<span class="stub"><span>義起走讀！<br><b>'+esc(S.date||'')+'</b></span><span class="slot">點這張<br>選路線<span class="tkseal">出發</span></span></span></button>';
     });
     h+='</div></div><div class="deckctl"><button type="button" id="dk-prev" aria-label="上一條路線">‹</button><span class="dots">'+R.map(function(){return '<i></i>'}).join('')+'</span><button type="button" id="dk-next" aria-label="下一條路線">›</button></div>'+
-      '<p class="deckhint">左右滑動看三條路線，點一下車票蓋章選定</p>';
-    h+='</section><section class="stack"><h2>寫下你的名字</h2><p class="small">照片會存進你自己的資料夾。地圖上其他同學只會看到你的名字，看不到班級座號。</p>'+
+      '<p class="deckhint">左右滑動看路線，點一下車票就能選定</p>';
+    h+='</section>';
+    /* 選好路線後才從下方滑出的填名字視窗 */
+    h+='<div class="nsback" id="nsback" hidden></div><div class="namesheet" id="ns" role="dialog" aria-modal="true" aria-labelledby="ns-t" hidden>'+
+      '<div class="nshead"><span class="nsno" id="ns-no"></span><div><p class="eyebrow">你選了</p><h2 id="ns-t"></h2></div><button type="button" class="nsx" id="ns-x" aria-label="換一條路線">換路線</button></div>'+
+      '<p class="small">最後一步：寫下你的名字。照片會存進你自己的資料夾，地圖上其他同學只會看到你的名字，看不到班級座號。</p>'+
       '<div class="form"><label for="f-cls">班級座號<input id="f-cls" inputmode="numeric" autocomplete="off" placeholder="例如 80105" value="'+esc(profile?profile.cls:'')+'"></label>'+
       '<label for="f-name">名字或暱稱<input id="f-name" autocomplete="off" maxlength="12" placeholder="例如 小明" value="'+esc(profile?profile.name:'')+'"></label></div>'+
       '<p class="err" id="f-err" hidden></p><div><button class="btn" id="go" type="button">出發！</button></div>'+
-      '<p class="hint">出發後網站會詢問能不能使用你的位置，請按「允許」。要走到每一站附近才能集章。</p></section>';
+      '<p class="hint">出發後網站會詢問能不能使用你的位置，請按「允許」。要走到每一站附近才能集章。</p></div>';
     return h;
   }
   /* 車票上的路線走向：用真實座標畫，集合點→三站→回集合點 */
@@ -601,7 +654,28 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
       chosen=c.getAttribute('data-r');
       cards.forEach(function(x){x.setAttribute('aria-checked',x===c)});
       if(navigator.vibrate)try{navigator.vibrate(30)}catch(e){}
+      setTimeout(openSheet,reduceM?0:480);   /* 等印章蓋下去再滑出 */
     }
+    var reduceM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var ns=document.getElementById('ns'), nsb=document.getElementById('nsback');
+    function openSheet(){
+      var r=routeById(chosen); if(!r) return; var i=R.indexOf(r);
+      ns.style.setProperty('--rc',r.color);
+      document.getElementById('ns-no').textContent=NUM[i];
+      document.getElementById('ns-t').textContent=r.name.replace(/^路線.\s*/,'');
+      document.getElementById('f-err').hidden=true;
+      ns.hidden=false; nsb.hidden=false; document.body.classList.add('ns-open');
+      requestAnimationFrame(function(){ns.classList.add('in');nsb.classList.add('in')});
+      setTimeout(function(){var f=document.getElementById(document.getElementById('f-cls').value?'go':'f-cls');if(f)f.focus({preventScroll:true})},350);
+    }
+    function closeSheet(){
+      ns.classList.remove('in'); nsb.classList.remove('in'); document.body.classList.remove('ns-open');
+      setTimeout(function(){ns.hidden=true;nsb.hidden=true},reduceM?0:260);
+      var c=cards[idx]; if(c) c.focus({preventScroll:true});
+    }
+    document.getElementById('ns-x').addEventListener('click',closeSheet);
+    nsb.addEventListener('click',closeSheet);
+    ns.addEventListener('keydown',function(e){if(e.key==='Escape')closeSheet()});
     cards.forEach(function(c,i){c.addEventListener('click',function(){
       if(moved)return;
       if(i!==idx){go(i);return}
@@ -635,7 +709,7 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
       if(msg){err.textContent=msg;err.hidden=false;return}
       profile={route:chosen,cls:cls,name:name}; store('yizhu-walk-profile',profile);
       if(monPos[chosen]==null){monPos[chosen]=0;store('yizhu-walk-monpos',monPos)}
-      selected=null; startGeo();
+      selected=null; startGeo(); document.body.classList.remove('ns-open');
       location.hash='map';
     });
   }
@@ -1040,13 +1114,14 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
     var h='<div class="spot-hero" style="--rc:'+r.color+'"><p class="eyebrow">'+esc(r.name)+'・第 '+(i+1)+' 站</p><h1>'+esc(p.name)+'</h1>'+
       '<div class="chips"><span class="chip type" style="--tc:'+t.color+'">'+t.name+'</span><span class="chip">'+esc(p.fullName)+'</span>'+(p.status==='draft'?'<span class="chip draft">內容待查證</span>':'')+'</div></div>';
     h+='<section class="stack" style="--rc:'+r.color+'">';
+    /* 地點照片：放在 images/ 資料夾，檔名用地點代號，例如 images/wengqingjiang.jpg；data.js 的 image 有填就用填的檔名 */
+    h+='<figure class="photo"><img src="images/'+esc(p.image||id+'.jpg')+'" alt="'+esc(p.name)+'的照片" onerror="this.parentNode.remove()">'+(p.imageCredit?'<figcaption>'+esc(p.imageCredit)+'</figcaption>':'')+'</figure>';
     if(profile) h+='<div class="stampbox"><p><b>到了'+esc(p.name)+'嗎？</b></p>'+stampBlock(id)+'</div>';
     h+='<div class="block up"><div class="up-head"><h3>我拍的照片</h3>'+(profile?'<span class="small">存到「'+esc(profile.cls+'_'+profile.name)+'」資料夾</span>':'')+'</div>'+
-      (profile?'<p class="small">拍下你在這一站看到的東西，最多 '+S.maxPhotos+' 張。第一張會變成你的圖卡照片。</p>'+
+      (profile?'<p class="small">拍下你在這一站看到的東西，最多 '+S.maxPhotos+' 張。第一張會變成你的圖卡照片。拍錯了可以按照片右上角的 × 刪掉。</p>'+
         '<div><span class="btn pick-photo">＋ 拍照或選照片<input type="file" accept="image/*" multiple id="file" aria-label="拍照或選照片"></span></div>'+
         '<div class="thumbs" id="thumbs">'+thumbs(id)+'</div>'+(S.uploadUrl?'':'<p class="hint">提醒：老師還沒設定上傳網址，照片目前只存在這支手機。</p>')
        :'<p class="small">要先<a href="#">選路線並寫下名字</a>，才能上傳照片。</p>')+'</div>';
-    h+='<div class="photo">'+(p.image?'<img src="images/'+esc(p.image)+'" alt="'+esc(p.name)+'" onerror="this.remove()">':'照片準備中')+'</div>';
     h+='<p>'+esc(p.intro)+'</p>';
     h+='<div class="block"><h3>小知識</h3><ul>'+p.facts.map(function(f){return'<li>'+esc(f)+'</li>'}).join('')+'</ul></div>';
     h+='<div class="block mission"><h3>走讀任務</h3><p>'+esc(p.mission)+'</p></div>';
@@ -1059,7 +1134,9 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
   function thumbs(id){
     return (photos[id]||[]).map(function(ph){
       var label={ok:'已上傳',wait:'等待補傳',up:'上傳中',local:'只在手機'}[ph.status]||'';
-      return '<div class="th">'+(ph.thumb?'<img src="'+ph.thumb+'" alt="'+esc(P[id].name)+' 的照片">':'')+'<span class="st '+ph.status+'">'+label+'</span></div>';
+      return '<div class="th" data-spot="'+id+'" data-ph="'+ph.id+'">'+(ph.thumb?'<img src="'+ph.thumb+'" alt="'+esc(P[id].name)+' 的照片">':'')+'<span class="st '+ph.status+'">'+label+'</span>'+
+        '<button type="button" class="del" aria-label="刪除這張照片">×</button>'+
+        '<span class="ask"><b>刪除這張？</b><button type="button" class="yes">刪除</button><button type="button" class="no">取消</button></span></div>';
     }).join('');
   }
   function refreshThumbs(id){var el=document.getElementById('thumbs');if(el&&id===thumbSpot)el.innerHTML=thumbs(id);if(location.hash==='#album')render()}
@@ -1091,11 +1168,30 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
         if(!store('yizhu-walk-photos',photos)){ph.thumb='';store('yizhu-walk-photos',photos)}
         refreshThumbs(id); if(after) after(ph);
         var rt=routeOf(id);
+        ph.fn=P[id].name+'_'+new Date(ph.ts).toISOString().replace(/[:.]/g,'-')+'.jpg'; ph.route=rt.name; store('yizhu-walk-photos',photos);
         queue({kind:'photo',spot:id,phId:ph.id,body:{type:'photo',key:S.uploadKey,routeId:rt.id,route:rt.name,student:profile.cls+'_'+profile.name,
-          spotId:id,spot:P[id].name,filename:P[id].name+'_'+new Date(ph.ts).toISOString().replace(/[:.]/g,'-')+'.jpg',data:out[0].split(',')[1]}});
+          spotId:id,spot:P[id].name,filename:ph.fn,data:out[0].split(',')[1]}});
       }).catch(function(){note('這張照片讀不出來，請換一張試試。')});
     });
   }
+  /* 刪除照片：從手機移除、取消還沒送出的上傳；已上傳的請雲端移到垃圾桶 */
+  function deletePhoto(spotId,phId){
+    var list=photos[spotId]||[], ph=list.filter(function(x){return x.id===phId})[0]; if(!ph) return;
+    photos[spotId]=list.filter(function(x){return x.id!==phId}); delete full[phId]; store('yizhu-walk-photos',photos);
+    allQueued().then(function(l){return Promise.all((l||[]).filter(function(it){return it.kind==='photo'&&it.phId===phId}).map(function(it){return removeQ(it.qid)}))}).then(function(){
+      if(S.uploadUrl&&profile&&ph.fn&&ph.status!=='local')
+        queue({kind:'del',body:{type:'delete',key:S.uploadKey,route:ph.route||routeOf(spotId).name,student:profile.cls+'_'+profile.name,filename:ph.fn}});
+      updatePending();
+    });
+    refreshThumbs(spotId);
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.th button'); if(!b) return;
+    var th=b.closest('.th');
+    if(b.classList.contains('del')){th.classList.add('asking');th.querySelector('.yes').focus()}
+    else if(b.classList.contains('no')){th.classList.remove('asking');th.querySelector('.del').focus()}
+    else if(b.classList.contains('yes')){deletePhoto(th.getAttribute('data-spot'),th.getAttribute('data-ph'))}
+  });
   function note(msg){var el=document.createElement('p');el.className='err';el.textContent=msg;var t=document.getElementById('thumbs');if(t){t.parentNode.insertBefore(el,t);setTimeout(function(){el.remove()},3500)}}
 
   /* ================= 上傳佇列：先存在手機（IndexedDB），有網路時依序送出，失敗就等下次補傳 ================= */
@@ -1121,8 +1217,10 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
     if(!S.uploadUrl||flushing) return;
     flushing=true;
     allQueued().then(function(list){
-      list.sort(function(a,b){if(a.kind!==b.kind)return a.kind==='stamp'?-1:1;return a.qid<b.qid?-1:1});   /* 集章紀錄先送，不會被大張照片卡住 */
+      list.sort(function(a,b){if(a.kind!==b.kind&&(a.kind==='stamp'||b.kind==='stamp'))return a.kind==='stamp'?-1:1;return a.qid<b.qid?-1:1});   /* 集章紀錄先送，不會被大張照片卡住 */
       return list.reduce(function(p,item){return p.then(function(stop){
+        if(item.kind==='del') return send(item.body).then(function(){return removeQ(item.qid)},function(){
+            item.tries=(item.tries||0)+1; return item.tries>=6?removeQ(item.qid):tx('readwrite',function(s){return s.put(item)}).catch(function(){})}).then(function(){return stop});
         if(stop){if(item.kind==='photo')setPhotoStatus(item.spot,item.phId,'wait');return true}
         if(item.kind==='photo') setPhotoStatus(item.spot,item.phId,'up');
         return send(item.body).then(function(){if(item.kind==='photo')setPhotoStatus(item.spot,item.phId,'ok');return removeQ(item.qid).then(function(){return false})})
@@ -1164,8 +1262,8 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
     var mine=myRoute()&&myRoute().id===r.id;
     var dots=r.stops.map(function(sid,i){return '<span class="'+(stampTs(sid)?'on':'')+'">'+(stampTs(sid)?'✓':i+1)+'</span>'}).join('');
     var h='<div class="overlay" id="ov"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="mt">'+
-      '<div class="card" style="--tc:'+t.color+'"><div class="card-top"><span>'+t.name+'</span><span>'+esc(r.name.slice(0,3))+'・第'+(r.stops.indexOf(id)+1)+'站</span></div>'+
-      '<div class="card-art" id="cart">'+cardArt(id,t.color)+'</div>'+
+      '<div class="card" style="--tc:'+r.color+'"><div class="card-top"><span>'+t.name+'</span><span>'+esc(r.name.slice(0,3))+'・第'+(r.stops.indexOf(id)+1)+'站</span></div>'+
+      '<div class="card-art" id="cart">'+cardArt(id,r.color)+'</div>'+
       '<div class="seal"><span>已集章</span><small>'+fmt(stampTs(id))+'</small></div>'+
       '<div class="card-body"><h3 id="mt">'+esc(p.name)+'</h3><p class="pw">能力：'+esc(t.power)+'</p><p class="small">'+esc(p.facts[0]||'')+'</p>'+
       (profile?'<span class="card-photo">📷 拍一張放進圖卡<input type="file" accept="image/*" id="cfile" aria-label="拍一張放進圖卡"></span>':'')+'</div></div>'+
@@ -1205,12 +1303,21 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
 
   /* ================= 角色圖鑑 ================= */
   function cards(){
-    var h='<div class="spot-hero" style="--rc:var(--violet)"><p class="eyebrow">義竹角色圖鑑</p><h1>角色圖鑑</h1><p class="lead">九個地點，九個角色。集章後角色就會亮起來。</p></div><section><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px">';
-    Object.keys(P).forEach(function(id){var p=P[id],t=S.types[p.type],on=stampTs(id);
-      h+='<a href="#spot-'+id+'" style="text-decoration:none;background:var(--white);border:3px '+(on?'solid':'dashed')+' '+t.color+';border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:6px">'+
-        '<div style="aspect-ratio:1;max-width:100%;background:var(--paper);border-radius:12px;display:grid;place-items:center;overflow:hidden">'+(on?cardArt(id,t.color).replace('<svg ','<svg style="width:70%" ').replace('<img ','<img style="width:100%;height:100%;object-fit:cover" '):'<span style="font-size:40px;font-weight:900;color:'+t.color+'">?</span>')+'</div>'+
-        '<span class="chip type" style="--tc:'+t.color+';align-self:flex-start">'+t.name+'</span><b>'+esc(p.name)+'</b></a>'});
-    return h+'</div></section>';
+    var my=profile?myRoute():null;
+    var h='<div class="spot-hero" style="--rc:var(--violet)"><p class="eyebrow">義竹角色圖鑑</p><h1>角色圖鑑</h1><p class="lead">三條路線，三個主題，每條路線住著三個角色。走到站點集章，角色就會亮起來。</p></div><section class="dex">';
+    R.forEach(function(rt,ri){
+      var n=rt.stops.filter(function(x){return stampTs(x)}).length;
+      h+='<div class="dexr" style="--rc:'+rt.color+'"><div class="dexh"><span class="no">路線'+NUM[ri]+'</span><h3>'+esc(rt.name.replace(/^路線.\s*/,''))+'</h3>'+
+        (my&&my.id===rt.id?'<span class="mine">你的路線</span>':'')+'<span class="cnt">'+n+' / '+rt.stops.length+'</span></div>'+
+        (rt.summary?'<p class="small">'+esc(rt.summary)+'</p>':'')+'<ol class="dexrow">';
+      rt.stops.forEach(function(id,i){var p=P[id],t=S.types[p.type],on=stampTs(id);
+        h+='<li><a href="#spot-'+id+'" class="dexc'+(on?' on':'')+'" style="--tc:'+rt.color+'"><span class="dn">'+(i+1)+'</span>'+
+          '<span class="da">'+(on?cardArt(id,rt.color):'<b>?</b>')+'</span>'+
+          '<span class="dt">'+t.name+'</span><b class="dname">'+esc(p.name)+'</b>'+(on?'':'<small>還沒集章</small>')+'</a></li>';
+      });
+      h+='</ol></div>';
+    });
+    return h+'</section>';
   }
 
   /* ================= 測試頁 ================= */

@@ -69,9 +69,9 @@
     <circle cx="660" cy="1500" r="74" fill="#F5D875"/>
     <text class="h" x="660" y="1522" font-size="62" fill="#2A2B3D" text-anchor="middle">集</text>
     <g class="m" font-size="28">
-      <text x="220" y="1356" fill="#EE7E7B" text-anchor="middle">路線一 古厝與信仰</text>
-      <text x="460" y="1880" fill="#6E7DBB">路線二 翁家與八掌溪</text>
-      <text x="1250" y="1310" fill="#F2A146" text-anchor="middle">路線三 學校與市場</text>
+      <text x="220" y="1356" fill="#EE7E7B" text-anchor="middle">路線一 新舊風格拼貼</text>
+      <text x="460" y="1880" fill="#6E7DBB">路線二 翁家記憶拼圖</text>
+      <text x="1250" y="1310" fill="#F2A146" text-anchor="middle">路線三 文武食光調色盤</text>
     </g>
   </g>
 
