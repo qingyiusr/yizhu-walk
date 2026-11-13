@@ -538,7 +538,10 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
   /* ================= 測試模式 =================
      網址最後加上 #test 進入。以你現在的位置為中心建立三個測試點，資料和正式版完全分開。 */
   var TEST=null;
+  function clearTest(){try{Object.keys(localStorage).forEach(function(k){if(k.indexOf('yizhu-test-')===0||k==='yizhu-walk-test')localStorage.removeItem(k)})}catch(e){}}
   try{TEST=JSON.parse(localStorage.getItem('yizhu-walk-test'))}catch(e){TEST=null}
+  /* 網址加 #endtest 直接結束測試；測試超過 12 小時自動結束，避免手機一直停在測試版 */
+  if(location.hash==='#endtest'||(TEST&&(!TEST.ts||Date.now()-TEST.ts>12*3600*1000))){clearTest();TEST=null;if(location.hash==='#endtest')history.replaceState(null,'',location.pathname)}
   if(TEST&&TEST.lat){
     var dLa=90/110574, dLo=90/(111320*Math.cos(TEST.lat*Math.PI/180));
     function tspot(name,full,type,icon,la,lo,lab,mission){return {name:name,fullName:full,type:type,icon:icon,lat:la,lng:lo,label:lab,image:'',card:'',status:'ok',
@@ -1488,8 +1491,7 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
     });
     var en=document.getElementById('t-end');
     if(en) en.addEventListener('click',function(){
-      try{Object.keys(localStorage).forEach(function(k){if(k.indexOf('yizhu-test-')===0||k==='yizhu-walk-test')localStorage.removeItem(k)})}catch(e){}
-      location.hash='';location.reload();
+      clearTest(); location.hash='';location.reload();
     });
   }
 
