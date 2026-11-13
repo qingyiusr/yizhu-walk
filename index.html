@@ -7,7 +7,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@900&display=swap">
 <style>
 /* Layout: 模式 C。首頁選路線後進入一整張義竹地圖（依真實座標），三條路線和各路線同學都在圖上；
    下方面板顯示下一站、距離與集章按鈕。米白紙底、粉彩色票、拼圖小怪獸。刻意採單一明亮主題，與海報一致。 */
@@ -16,6 +16,7 @@
   --yellow:#F5D875; --paper:#F2EEE6; --pink:#F3AFB0; --coral:#EE7E7B; --violet:#6E7DBB; --sky:#8FCDEB; --blue:#5DB6DE; --orange:#F2A146;
   --ok:#3E9B6E; --bad:#C2453F; --land:#ECE6D2;
   --font:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --head:"Noto Serif TC","Songti TC","PMingLiU",serif;   /* 標題：粗明體（思源宋體 Black） */
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -354,6 +355,7 @@ h2::before{border-radius:0;background:var(--pinkI);box-shadow:18px 0 0 var(--yel
 .btn{background:var(--blue);color:#fff;border-radius:6px;box-shadow:3px 3px 0 var(--pinkI)}
 .btn:disabled{background:#D9D7D0;color:#7D8295;box-shadow:none}
 .btn.ghost{background:transparent;color:var(--blue);box-shadow:0 0 0 2px var(--blue) inset}
+.spot-hero .btn.ghost{color:#fff;box-shadow:0 0 0 2px #fff inset,3px 3px 0 var(--pinkI)}
 .form input,.code input{border-radius:4px;border-color:var(--blue);background:var(--white)}
 .form input:focus,.code input:focus{border-color:var(--pinkI);box-shadow:2px 2px 0 var(--pinkI)}
 /* 首頁車票 */
@@ -472,6 +474,39 @@ body.ns-open{overflow:hidden}
 .dexc .dt{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.04em}
 .dexc .dname{font-size:14px;line-height:1.3;word-break:break-all}
 .dexc small{font-size:11px;color:var(--muted)}
+/* ---------- 我的作品 ---------- */
+.wform{display:flex;flex-direction:column;gap:14px}
+.fl{display:flex;flex-direction:column;gap:6px;font-weight:700;border:0;margin:0;padding:0;min-width:0}
+.fl legend{padding:0;margin-bottom:6px}
+.fl input:not([type=radio]):not([type=file]),.fl select,.fl textarea{font:inherit;font-weight:500;font-size:16px;padding:10px 12px;border:2px solid var(--blue);border-radius:4px;background:var(--white);color:var(--ink);width:100%;box-sizing:border-box}
+.fl textarea{resize:vertical}
+.fl .btn.pick-photo{align-self:flex-start}
+.wforms{display:flex;gap:8px;flex-wrap:wrap}
+.wforms label{position:relative}
+.wforms input{position:absolute;opacity:0;inset:0}
+.wforms span{display:inline-block;padding:7px 16px;border:2px solid var(--blue);border-radius:4px;color:var(--blue);font-weight:900}
+.wforms input:checked+span{background:var(--blue);color:#fff;box-shadow:2px 2px 0 var(--pinkI)}
+.wforms input:focus-visible+span{outline:3px solid var(--pinkI);outline-offset:2px}
+.wform .err{margin:0;color:var(--bad);font-weight:700}
+.wlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.wcard{background:var(--white);border:2px solid var(--rc);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;box-shadow:3px 3px 0 var(--rc)}
+.wimg{position:relative;aspect-ratio:4/3;background:var(--paper);max-width:100%}
+.wimg img{width:100%;height:100%;object-fit:contain;display:block}
+.wimg .wn{position:absolute;left:8px;top:8px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:3px}
+.wimg .st{position:absolute;left:8px;bottom:8px;font-size:12px;font-weight:900;padding:2px 9px;border-radius:999px;background:var(--white)}
+.wimg .st.ok{background:var(--ok);color:#fff}.wimg .st.wait{background:var(--orange);color:#fff}.wimg .st.local{background:var(--yellow)}
+.wtx{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.wtx b{font-family:var(--head);font-size:19px;color:var(--blue)}
+.wtx p{margin:2px 0 0;font-size:14px}
+.wdel{margin-top:6px;font-size:13px}
+.linkbtn{border:0;background:none;padding:0;color:var(--muted);text-decoration:underline;font:inherit;cursor:pointer}
+.wask{display:none;align-items:center;gap:8px}
+.wcard.asking .wask{display:flex}.wcard.asking .linkbtn{display:none}
+.wask button{border:0;border-radius:4px;font-weight:900;padding:4px 12px;font-size:13px;font-family:inherit}
+.wask button[data-act=yes]{background:var(--pinkI);color:#fff}.wask button[data-act=no]{background:var(--paper);color:var(--ink)}
+/* ---------- 標題字：粗明體 ---------- */
+h1,h2,h3,.brand,.ld .title,.tk .band span,.tk .ttl,.tk .tkseal,.pbody h3,.seal2,.card-top,.seal,.reward b,.nsno,.dexh .no,.dexc .dname,.stampbox p b,.mclose,.deckctl button{font-family:var(--head);font-weight:900}
+#map text{font-family:var(--head)}
 footer{background:var(--blue)!important;color:#fff!important}
 footer{margin-top:48px;color:var(--paper);background:var(--ink)}
 footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 26px;text-align:center;font-size:13px;line-height:1.9}
@@ -575,7 +610,7 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
 
   /* ================= 導覽列 ================= */
   function nav(cur){
-    var items=profile?[['map','地圖'],['album','我的資料夾'],['cards','角色圖鑑'],['','換路線']]:[['','選路線'],['cards','角色圖鑑']];
+    var items=profile?[['map','地圖'],['album','資料夾'],['cards','圖鑑'],['works','作品'],['','換路線']]:[['','選路線'],['cards','角色圖鑑']];
     if(TEST&&TEST.lat) items=[['test','測試中']].concat(items.filter(function(x){return x[0]!==''&&x[0]!=='cards'}));
     document.getElementById('nav').innerHTML=items.map(function(it){
       return '<a href="#'+it[0]+'"'+(cur===it[0]?' aria-current="page"':'')+'>'+it[1]+'</a>'}).join('');
@@ -1125,7 +1160,6 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
     h+='<p>'+esc(p.intro)+'</p>';
     h+='<div class="block"><h3>小知識</h3><ul>'+p.facts.map(function(f){return'<li>'+esc(f)+'</li>'}).join('')+'</ul></div>';
     h+='<div class="block mission"><h3>走讀任務</h3><p>'+esc(p.mission)+'</p></div>';
-    h+='<div class="block elder"><h3>阿公阿嬤說</h3><p class="'+(p.elder?'':'small')+'">'+(p.elder?esc(p.elder):'等同學訪問長輩後，把聽到的故事寫在這裡。')+'</p></div>';
     h+='<div class="sources"><b>資料來源</b><ul>'+p.sources.map(function(s){return'<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.title)+'</a></li>'}).join('')+'</ul></div>';
     h+='<div class="pager"><a href="#'+(profile?'map':'')+'">← 回地圖</a></div></section>';
     return h;
@@ -1192,6 +1226,7 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
     else if(b.classList.contains('no')){th.classList.remove('asking');th.querySelector('.del').focus()}
     else if(b.classList.contains('yes')){deletePhoto(th.getAttribute('data-spot'),th.getAttribute('data-ph'))}
   });
+  function note_(msg){return note(msg)}
   function note(msg){var el=document.createElement('p');el.className='err';el.textContent=msg;var t=document.getElementById('thumbs');if(t){t.parentNode.insertBefore(el,t);setTimeout(function(){el.remove()},3500)}}
 
   /* ================= 上傳佇列：先存在手機（IndexedDB），有網路時依序送出，失敗就等下次補傳 ================= */
@@ -1221,10 +1256,11 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
       return list.reduce(function(p,item){return p.then(function(stop){
         if(item.kind==='del') return send(item.body).then(function(){return removeQ(item.qid)},function(){
             item.tries=(item.tries||0)+1; return item.tries>=6?removeQ(item.qid):tx('readwrite',function(s){return s.put(item)}).catch(function(){})}).then(function(){return stop});
-        if(stop){if(item.kind==='photo')setPhotoStatus(item.spot,item.phId,'wait');return true}
-        if(item.kind==='photo') setPhotoStatus(item.spot,item.phId,'up');
-        return send(item.body).then(function(){if(item.kind==='photo')setPhotoStatus(item.spot,item.phId,'ok');return removeQ(item.qid).then(function(){return false})})
-          .catch(function(){if(item.kind==='photo')setPhotoStatus(item.spot,item.phId,'wait');return true});
+        var mark=function(st){if(item.kind==='photo')setPhotoStatus(item.spot,item.phId,st);else if(item.kind==='work')setWorkStatus(item.workId,item.pageId,st)};
+        if(stop){mark('wait');return true}
+        mark('up');
+        return send(item.body).then(function(){mark('ok');return removeQ(item.qid).then(function(){return false})})
+          .catch(function(){mark('wait');return true});
       })},Promise.resolve(false));
     }).catch(function(){}).then(function(){flushing=false;updatePending()});
   }
@@ -1299,6 +1335,91 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
         (list.length?'<div class="thumbs">'+thumbs(id)+'</div>':'<p class="small">還沒有照片。</p>')+'</div>';
     })});
     return h+'</section>';
+  }
+
+  /* ================= 我的作品：12/5、1/9 完成的插畫或漫畫 ================= */
+  var works=load('yizhu-walk-works',[]), workFull={}, wDraft=[];
+  var FORMS=['插畫','漫畫','其他'], WMAX=4;
+  function saveWorks(){if(!store('yizhu-walk-works',works)){works.forEach(function(w){w.pages.forEach(function(pg){pg.thumb=''})});store('yizhu-walk-works',works)}}
+  function worksPage(){
+    var r=myRoute();
+    var opt=R.map(function(rt){return '<optgroup label="'+esc(rt.name)+'">'+rt.stops.map(function(id){return '<option value="'+id+'">'+esc(P[id].name)+'</option>'}).join('')+'</optgroup>'}).join('');
+    var h='<div class="spot-hero" style="--rc:var(--orange)"><p class="eyebrow">作品上傳</p><h1>我的作品</h1>'+
+      '<p class="lead">在工作坊完成的插畫或漫畫，拍照或掃描後上傳到這裡。作品會依地點存進計畫的雲端資料夾，之後會放進走讀地圖。</p></div><section class="stack">';
+    h+='<form class="block wform" id="wform" novalidate><h3>上傳一件作品</h3>'+
+      '<label class="fl">作品名稱<input id="w-title" maxlength="30" autocomplete="off" placeholder="例如：八掌溪的聲音"></label>'+
+      '<label class="fl">畫的是哪一站<select id="w-spot">'+opt+'</select></label>'+
+      '<fieldset class="fl"><legend>形式</legend><div class="wforms">'+FORMS.map(function(f,i){return '<label><input type="radio" name="w-form" value="'+f+'"'+(i===0?' checked':'')+'><span>'+f+'</span></label>'}).join('')+'</div></fieldset>'+
+      '<label class="fl">一句話說說你的作品<textarea id="w-note" maxlength="80" rows="2" placeholder="例如：我把河邊的風畫成一隻會唱歌的怪獸"></textarea></label>'+
+      '<div class="fl"><span>作品圖片<span class="small">（最多 '+WMAX+' 張，漫畫可以一頁一張）</span></span>'+
+        '<span class="btn pick-photo">＋ 拍照或選圖片<input type="file" accept="image/*" multiple id="w-file" aria-label="選擇作品圖片"></span>'+
+        '<div class="thumbs" id="w-pre"></div></div>'+
+      '<p class="err" id="w-err" role="alert" hidden></p>'+
+      '<button class="btn" type="submit" id="w-go">上傳作品</button>'+
+      (S.uploadUrl?'':'<p class="hint">提醒：老師還沒設定上傳網址，作品目前只存在這支手機。</p>')+'</form>';
+    h+='<h2>已上傳的作品</h2><div class="wlist" id="wlist">'+workList()+'</div>';
+    return h+'</section>';
+  }
+  function workList(){
+    if(!works.length) return '<p class="small">還沒有作品。完成作品後，從上面上傳第一件。</p>';
+    return works.slice().reverse().map(function(w){
+      var st=w.pages.every(function(pg){return pg.status==='ok'})?'ok':w.pages.some(function(pg){return pg.status==='up'})?'up':w.pages.some(function(pg){return pg.status==='wait'})?'wait':w.pages[0].status;
+      var label={ok:'已上傳',wait:'等待補傳',up:'上傳中',local:'只在手機'}[st]||'';
+      var pg=w.pages[0], rt=routeOf(w.spot);
+      return '<article class="wcard" data-w="'+w.id+'" style="--rc:'+(rt?rt.color:'var(--blue)')+'"><div class="wimg">'+(pg&&pg.thumb?'<img src="'+(workFull[pg.id]||pg.thumb)+'" alt="'+esc(w.title)+'">':'')+
+        (w.pages.length>1?'<span class="wn">共 '+w.pages.length+' 張</span>':'')+'<span class="st '+st+'">'+label+'</span></div>'+
+        '<div class="wtx"><b>'+esc(w.title)+'</b><span class="small">'+esc(P[w.spot]?P[w.spot].name:'')+'・'+esc(w.form)+'</span>'+(w.note?'<p>'+esc(w.note)+'</p>':'')+
+        '<div class="wdel"><button type="button" class="linkbtn" data-act="ask">刪除這件作品</button><span class="wask"><b>確定刪除？</b><button type="button" data-act="yes">刪除</button><button type="button" data-act="no">取消</button></span></div></div></article>';
+    }).join('');
+  }
+  function refreshWorks(){var el=document.getElementById('wlist');if(el)el.innerHTML=workList()}
+  function drawDraft(){
+    var el=document.getElementById('w-pre'); if(!el) return;
+    el.innerHTML=wDraft.map(function(d,i){return '<div class="th"><img src="'+d.thumb+'" alt="第'+(i+1)+'張"><button type="button" class="del" data-i="'+i+'" aria-label="移除第'+(i+1)+'張">×</button></div>'}).join('');
+  }
+  function bindWorks(){
+    var sel=document.getElementById('w-spot'), r=myRoute(); if(r) sel.value=r.stops[0];
+    var f=document.getElementById('w-file'), err=document.getElementById('w-err'), go=document.getElementById('w-go');
+    drawDraft();
+    f.addEventListener('change',function(){
+      var arr=Array.prototype.slice.call(f.files,0,Math.max(0,WMAX-wDraft.length)); f.value='';
+      if(!arr.length){err.textContent='一件作品最多 '+WMAX+' 張圖片。';err.hidden=false;return}
+      err.hidden=true;
+      arr.forEach(function(file){Promise.all([resize(file,2400,.88),resize(file,360,.75)]).then(function(o){wDraft.push({full:o[0],thumb:o[1]});drawDraft()}).catch(function(){err.textContent='有一張圖片讀不出來，請換一張試試。';err.hidden=false})});
+    });
+    document.getElementById('w-pre').addEventListener('click',function(e){var b=e.target.closest('.del');if(!b)return;wDraft.splice(+b.getAttribute('data-i'),1);drawDraft()});
+    document.getElementById('wform').addEventListener('submit',function(e){
+      e.preventDefault();
+      var title=document.getElementById('w-title').value.trim(), spot=sel.value, form=(app.querySelector('input[name=w-form]:checked')||{}).value||'插畫', note=document.getElementById('w-note').value.trim();
+      if(!title){err.textContent='請寫上作品名稱。';err.hidden=false;document.getElementById('w-title').focus();return}
+      if(!wDraft.length){err.textContent='請先選擇作品圖片。';err.hidden=false;return}
+      err.hidden=true; go.disabled=true;
+      var ts=Date.now(), w={id:ts.toString(36)+Math.random().toString(36).slice(2,6),title:title,spot:spot,form:form,note:note,ts:ts,pages:[]};
+      var rt=routeOf(spot), who=profile.cls+'_'+profile.name, stamp=new Date(ts).toISOString().replace(/[:.]/g,'-');
+      wDraft.forEach(function(d,i){
+        var pg={id:w.id+'p'+i,thumb:d.thumb,status:S.uploadUrl?'up':'local',fn:who+'_'+title+'_'+(i+1)+'of'+wDraft.length+'_'+stamp+'.jpg'};
+        workFull[pg.id]=d.full; w.pages.push(pg);
+        queue({kind:'work',workId:w.id,pageId:pg.id,body:{type:'work',key:S.uploadKey,routeId:rt.id,route:rt.name,student:who,name:profile.name,spotId:spot,spot:P[spot].name,
+          lat:P[spot].lat,lng:P[spot].lng,title:title,form:form,note:note,page:i+1,pages:wDraft.length,filename:pg.fn,ts:ts,data:d.full.split(',')[1]}});
+      });
+      works.push(w); saveWorks(); wDraft=[];
+      document.getElementById('wform').reset(); sel.value=spot; drawDraft(); refreshWorks(); go.disabled=false;
+      note_('作品已送出'+(S.uploadUrl?'，上傳完成後會顯示「已上傳」。':'。'));
+    });
+    document.getElementById('wlist').addEventListener('click',function(e){
+      var b=e.target.closest('button[data-act]'); if(!b) return; var card=b.closest('.wcard'), act=b.getAttribute('data-act');
+      if(act==='ask') card.classList.add('asking'); else if(act==='no') card.classList.remove('asking'); else if(act==='yes') deleteWork(card.getAttribute('data-w'));
+    });
+  }
+  function setWorkStatus(wid,pid,st){var w=works.filter(function(x){return x.id===wid})[0];if(!w)return;var pg=w.pages.filter(function(x){return x.id===pid})[0];if(pg&&pg.status!==st){pg.status=st;saveWorks();refreshWorks()}}
+  function deleteWork(wid){
+    var w=works.filter(function(x){return x.id===wid})[0]; if(!w) return;
+    works=works.filter(function(x){return x.id!==wid}); saveWorks();
+    allQueued().then(function(l){return Promise.all((l||[]).filter(function(it){return it.kind==='work'&&it.workId===wid}).map(function(it){return removeQ(it.qid)}))}).then(function(){
+      if(S.uploadUrl&&profile) w.pages.forEach(function(pg){if(pg.status!=='local')queue({kind:'del',body:{type:'delwork',key:S.uploadKey,spot:P[w.spot]?P[w.spot].name:'',filename:pg.fn}})});
+      updatePending();
+    });
+    w.pages.forEach(function(pg){delete workFull[pg.id]}); refreshWorks();
   }
 
   /* ================= 角色圖鑑 ================= */
@@ -1382,6 +1503,7 @@ footer .in{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-ins
     else if(hsh.indexOf('spot-')===0&&P[hsh.slice(5)]){var id=hsh.slice(5);html=spot(id);cur='map';after=function(){bindSpot(id)}}
     else if(hsh==='album'&&profile){html=album();after=function(){var b=document.getElementById('retry');if(b)b.addEventListener('click',flush)}}
     else if(hsh==='cards') html=cards();
+    else if(hsh==='works'&&profile){html=worksPage();after=bindWorks}
     else if(TEST&&TEST.lat&&myRoute()){location.hash='map';return}
     else {html=home();cur='';after=bindHome}
     if(hsh==='test')cur='test';
